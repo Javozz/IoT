@@ -1,0 +1,424 @@
+[
+    {
+        "id": "3c56cfe4d1716dc7",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "726c451b5dee7dc8",
+        "type": "http response",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f84d5c23fe0eb18e",
+        "type": "http in",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "url": "/pub/:topic/:payload",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "655d1784404cf8e9"
+            ]
+        ]
+    },
+    {
+        "id": "655d1784404cf8e9",
+        "type": "function",
+        "z": "3c56cfe4d1716dc7",
+        "name": "create message",
+        "func": "msg.topic = msg.req.params.topic;\nmsg.payload = msg.req.params.payload;\nmsg.qos = 2;\nmsg.retain = false;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "32ef5b8353604e31",
+                "ae9fb18151917815"
+            ]
+        ]
+    },
+    {
+        "id": "32ef5b8353604e31",
+        "type": "function",
+        "z": "3c56cfe4d1716dc7",
+        "name": "create response",
+        "func": "msg.payload = {\n    success: true,\n    message: \"published \" +\n             msg.req.params.topic +\n             \"/\" +\n             msg.req.params.payload\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 440,
+        "wires": [
+            [
+                "726c451b5dee7dc8"
+            ]
+        ]
+    },
+    {
+        "id": "ae9fb18151917815",
+        "type": "mqtt out",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1d203efd157e288d",
+        "x": 570,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ae496ef1cd602a3b",
+        "type": "inject",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "f64cb5a39bc681ca",
+                "35f856302658d789"
+            ]
+        ]
+    },
+    {
+        "id": "f64cb5a39bc681ca",
+        "type": "debug",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "30703dc3e373bacb",
+        "type": "http in",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "url": "/get/:topic",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 620,
+        "wires": [
+            [
+                "633c96dd17275232"
+            ]
+        ]
+    },
+    {
+        "id": "d31c926678783e53",
+        "type": "http in",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "url": "/get/:topic/last/:count",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 700,
+        "wires": [
+            [
+                "633c96dd17275232"
+            ]
+        ]
+    },
+    {
+        "id": "633c96dd17275232",
+        "type": "function",
+        "z": "3c56cfe4d1716dc7",
+        "name": "create query",
+        "func": "if(!msg.req.params.count)\n    msg.req.params.count = 1;\n    \nmsg.topic = \"SELECT id,topic,payload,timestamp \" +\n            \"FROM thingData \" +\n            \"WHERE topic= '\" + escape(msg.req.params.topic) + \"' \" +\n            \"AND deleted=0 \" +\n            \"ORDER BY id DESC \" +\n            \"LIMIT \" + msg.req.params.count + \";\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 660,
+        "wires": [
+            [
+                "7b77bfebad8be7b7"
+            ]
+        ]
+    },
+    {
+        "id": "7b77bfebad8be7b7",
+        "type": "mysql",
+        "z": "3c56cfe4d1716dc7",
+        "mydb": "2971b5fe04f05c57",
+        "name": "",
+        "x": 500,
+        "y": 660,
+        "wires": [
+            [
+                "5584db4c565fc326"
+            ]
+        ]
+    },
+    {
+        "id": "5584db4c565fc326",
+        "type": "function",
+        "z": "3c56cfe4d1716dc7",
+        "name": "prepare response",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 660,
+        "wires": [
+            [
+                "03188cc8a747e2f2"
+            ]
+        ]
+    },
+    {
+        "id": "03188cc8a747e2f2",
+        "type": "http response",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 830,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "35f856302658d789",
+        "type": "mqtt out",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "topic": "timestamp",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "2ffd3348a8d4577d",
+        "x": 390,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "b366a8e4ee19a72a",
+        "type": "mqtt in",
+        "z": "3c56cfe4d1716dc7",
+        "name": "listen everything",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "459d0c390aef0d1a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 120,
+        "y": 540,
+        "wires": [
+            [
+                "b2b43412219de73f"
+            ]
+        ]
+    },
+    {
+        "id": "1c198fdbed836530",
+        "type": "debug",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "b2b43412219de73f",
+        "type": "function",
+        "z": "3c56cfe4d1716dc7",
+        "name": "",
+        "func": "//Create query\n//get microtime()\n\nvar timestamp = new Date().getTime()/1000;\n\n//pad it with trailing zeroes\n\ntimestamp = timestamp.toString()+\"000\";\n\n//trim to exact length 10 +1 +3\n\ntimestamp = timestamp.substring(0,14);\n\nvar strQuery = \"INSERT INTO thingData (topic, payload,timestamp, deleted) VALUES ('\" + escape(msg.topic) + \"','\" + escape(msg.payload) + \"','\" +timestamp + \"', 0);\";\nmsg.topic = strQuery;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 540,
+        "wires": [
+            [
+                "258a1e3b98f9c233"
+            ]
+        ]
+    },
+    {
+        "id": "258a1e3b98f9c233",
+        "type": "mysql",
+        "z": "3c56cfe4d1716dc7",
+        "mydb": "7c72f9d470199965",
+        "name": "",
+        "x": 480,
+        "y": 540,
+        "wires": [
+            [
+                "1c198fdbed836530"
+            ]
+        ]
+    },
+    {
+        "id": "1d203efd157e288d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "node-red",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "2971b5fe04f05c57",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "tSerieDB",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "2ffd3348a8d4577d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "node-red",
+        "usetls": false,
+        "protocolVersion": "3",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "459d0c390aef0d1a",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "node-red",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7c72f9d470199965",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "tSerieDB",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]
