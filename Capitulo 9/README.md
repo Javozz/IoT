@@ -47,4 +47,17 @@ curl -X GET "localhost:1880/get/mytopic/after//last/5"
 curl -X GET "localhost:1880/get/mytopic/during//last/5"
 ```
 
+### API de eliminacion de datos
+
+```bash
+curl -X GET "localhost:1880/get/timestamp/last/5"
+```
+
+```bash
+curl -X GET "localhost:1880/delete/timestamp/id/34"
+```
+
+```bash
+curl -X GET "localhost:1880/get/timestamp/last/5"
+```
 
