@@ -65,7 +65,7 @@ curl -X GET "localhost:1880/get/timestamp/during/1639359774270/last/5"
 ```
 
 <p align="center">
-  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/time.png" width="950" title="hover text">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/during.png" width="950" title="hover text">
 </p>
 
 ### API de eliminacion de datos
