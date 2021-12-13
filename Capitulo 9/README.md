@@ -35,19 +35,30 @@ curl -X GET "localhost:1880/get/topicLike/time*/payloadLike/*88*/last/5"
 <p align="center">
   <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/time.png" width="950" title="hover text">
 </p>
-
 ```bash
 curl -X GET "localhost:1880/get/timestamp/last/7"
 ```
-
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/last.png" width="950" title="hover text">
+</p>
 ```bash
-curl -X GET "localhost:1880/get/mytopic/after//last/5"
+curl -X GET "localhost:1880/get/timestamp/before/1639359774270/last/5"
 ```
-
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/before.png" width="950" title="hover text">
+</p>
 ```bash
-curl -X GET "localhost:1880/get/mytopic/during//last/5"
+curl -X GET "localhost:1880/get/timestamp/after/1639359774270/last/5"
 ```
-
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/after.png" width="950" title="hover text">
+</p>
+```bash
+curl -X GET "localhost:1880/get/timestamp/during/1639359774270/last/5"
+```
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/time.png" width="950" title="hover text">
+</p>
 ### API de eliminacion de datos
 <p align="center">
   <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/delete.png" width="950" title="hover text">
