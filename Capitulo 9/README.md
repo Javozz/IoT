@@ -110,3 +110,15 @@ Al volver mostrar los datos ya no se muestra el id:447
 <p align="center">
   <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/purge.png" width="950" title="hover text">
 </p>
+
+```bash
+curl -X GET "localhost:1880/purge/timestamp/id/447"
+```
+
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/purge%20deleted.png" width="950" title="hover text">
+</p>
+
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/purge%20DB.png" width="600" title="hover text">
+</p>
