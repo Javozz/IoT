@@ -119,6 +119,8 @@ curl -X GET "localhost:1880/purge/timestamp/id/447"
   <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/purge%20deleted.png" width="950" title="hover text">
 </p>
 
+Al volver a buscar ya no en la base de datos el id:447
+
 <p align="center">
   <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/purge%20DB.png" width="600" title="hover text">
 </p>
