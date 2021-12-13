@@ -32,8 +32,9 @@ curl -X GET "localhost:1880/get/topicLike/time*/payloadLike/*88*/last/5"
 </p>
 
 ### Agregar filtros basados en el tiempo
-
-
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/time.png" width="950" title="hover text">
+</p>
 
 ```bash
 curl -X GET "localhost:1880/get/timestamp/last/7"
@@ -48,6 +49,9 @@ curl -X GET "localhost:1880/get/mytopic/during//last/5"
 ```
 
 ### API de eliminacion de datos
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/delete.png" width="950" title="hover text">
+</p>
 
 ```bash
 curl -X GET "localhost:1880/get/timestamp/last/5"
@@ -60,4 +64,7 @@ curl -X GET "localhost:1880/delete/timestamp/id/34"
 ```bash
 curl -X GET "localhost:1880/get/timestamp/last/5"
 ```
-
+### Eliminacion completa de los datos
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/purge.png" width="950" title="hover text">
+</p>
