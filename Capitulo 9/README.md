@@ -78,13 +78,34 @@ curl -X GET "localhost:1880/get/timestamp/during/1639359774270/last/5"
 curl -X GET "localhost:1880/get/timestamp/last/5"
 ```
 
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/delete%20time.png" width="950" title="hover text">
+</p>
+
 ```bash
-curl -X GET "localhost:1880/delete/timestamp/id/34"
+curl -X GET "localhost:1880/delete/timestamp/id/447"
 ```
+
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/delete%20id.png" width="950" title="hover text">
+</p>
+
+El valor del atributo "deleted" cambia a "1" del id:447
+
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/delete%20DB.png" width="600" title="hover text">
+</p>
 
 ```bash
 curl -X GET "localhost:1880/get/timestamp/last/5"
 ```
+
+Al volver mostrar los datos ya no se muestra el id:447
+
+<p align="center">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/delete%20time%202.png" width="950" title="hover text">
+</p>
+
 ### Eliminacion completa de los datos
 <p align="center">
   <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%209/imagenes/purge.png" width="950" title="hover text">
