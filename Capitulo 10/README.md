@@ -1,6 +1,6 @@
 # Capitulo 10
 ## Creacion de la base de datos
-Se añade una nueva tabla de reglas
+Se añade una nueva tabla de reglas ***ruleEngine*** con los siguientes atributos.
 
 <p align="center">
   <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%2010/imagenes/Estructura%20BD.png" width="950" title="hover text">
