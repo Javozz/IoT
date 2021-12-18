@@ -20,5 +20,5 @@ Se añade una nueva tabla de reglas ***ruleEngine*** con los siguientes atributo
 
 ## Prueba del motor de reglas
 <p align="center">
-  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%2010/imagenes/debug.jpg" width="250" title="hover text">
+  <img src="https://github.com/Javozz/IoT/blob/main/Capitulo%2010/imagenes/debug.png" width="250" title="hover text">
 </p>
